@@ -1,0 +1,6 @@
+[template]
+exclude = [
+    "cliff.toml",
+    "Cargo.lock",
+    "target/"
+]
