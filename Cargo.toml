@@ -5,6 +5,13 @@ authors=["Mr.Rice"]
 edition = "2021"
 license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rcli"  # 库名，必须与包名一致
+path = "src/lib.rs"
+
+[[bin]]
+name = "rcli"
+path = "src/main.rs"
 
 [dependencies]
 anyhow = "1.0.102"
