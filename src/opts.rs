@@ -12,12 +12,32 @@ pub struct Opts {
 pub enum Subcommand {
     #[command(name = "csv", about = "Show CSV, or convert CSV to other formats")]
     Csv(CsvOpts),
+    #[command(name = "genpass", about = "Generate random password")]
+    GenPass(GenPassOpts),
 }
 
 #[derive(Debug, Clone, Copy)]
 pub enum OutputFormat {
     Json,
     Yaml,
+}
+#[derive(Debug, Parser)]
+pub struct GenPassOpts {
+    // 密码长度，默认8位
+    #[arg(short, long, default_value_t = 12)]
+    pub length: u8,
+    // 是否包含大写字母，默认包含
+    #[arg(long, default_value_t = true)]
+    pub uppercase: bool,
+    // 是否包含小写字母，默认包含
+    #[arg(long, default_value_t = true)]
+    pub lowercase: bool,
+    // 是否包含数字，默认包含
+    #[arg(long, default_value_t = true)]
+    pub number: bool,
+    // 是否包含特殊字符，默认包含
+    #[arg(long, default_value_t = true)]
+    pub symbol: bool,
 }
 #[derive(Debug, Parser)]
 pub struct CsvOpts {
