@@ -3,7 +3,7 @@ use csv::Reader;
 // use serde::{Deserialize, Serialize};
 use std::fs;
 
-use crate::opts::OutputFormat;
+use crate::cli::OutputFormat;
 
 // 不需要的结构体，我们已经通过.headers()?完成了头部的解析
 // #[derive(Debug, Serialize, Deserialize)]

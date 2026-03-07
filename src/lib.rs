@@ -1,5 +1,5 @@
-mod opts;
+mod cli;
 
-pub use opts::{GenPassOpts, Opts, Subcommand};
+pub use cli::{GenPassOpts, Opts, Subcommand};
 mod process;
 pub use process::*;
