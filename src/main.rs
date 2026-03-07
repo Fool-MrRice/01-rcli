@@ -1,8 +1,10 @@
+// use std::os::windows::process;
+
 use anyhow::Result;
 use clap::Parser;
 
-use rcli::process_csv;
-use rcli::{process_genpass, Opts, Subcommand};
+use rcli::{process_csv, process_decode, process_encode, process_genpass};
+use rcli::{Base64Format, Opts, Subcommand};
 
 /// rcli-01 csv -i input.csv -o output.json --header -d ','
 fn main() -> Result<()> {
@@ -25,6 +27,14 @@ fn main() -> Result<()> {
                 opts.symbol,
             )?;
         }
+        Subcommand::Base64(opts) => match opts.format {
+            Base64Format::Decode => {
+                process_decode(&opts.input, &opts.output)?;
+            }
+            Base64Format::Encode => {
+                process_encode(&opts.input, &opts.output)?;
+            }
+        },
     }
     Ok(())
 }

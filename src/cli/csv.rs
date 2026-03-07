@@ -42,7 +42,7 @@ impl fmt::Display for OutputFormat {
         write!(f, "{}", Into::<&str>::into(*self))
     }
 }
-fn verify_input_file(filename: &str) -> Result<String, &'static str> {
+pub fn verify_input_file(filename: &str) -> Result<String, &'static str> {
     if Path::new(filename).exists() {
         Ok(filename.to_string())
     } else {

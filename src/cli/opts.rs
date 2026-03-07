@@ -1,6 +1,6 @@
 use clap::Parser;
 
-use crate::cli::{CsvOpts, GenPassOpts};
+use crate::cli::{Base64Opts, CsvOpts, GenPassOpts};
 
 #[derive(Debug, Parser)]
 #[command(name = "rcli", version, author,about,long_about=None)]
@@ -14,4 +14,6 @@ pub enum Subcommand {
     Csv(CsvOpts),
     #[command(name = "genpass", about = "Generate random password")]
     GenPass(GenPassOpts),
+    #[command(name = "base64", about = "Encode or decode base64")]
+    Base64(Base64Opts),
 }
