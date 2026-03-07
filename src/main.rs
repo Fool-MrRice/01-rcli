@@ -3,8 +3,10 @@
 use anyhow::Result;
 use clap::Parser;
 
-use rcli::{process_csv, process_decode, process_encode, process_genpass};
-use rcli::{Base64Format, Opts, Subcommand};
+use rcli::{
+    process_csv, process_decode, process_encode, process_genpass, process_sign, process_verify,
+};
+use rcli::{Base64Format, Opts, SignCommand, Subcommand};
 
 /// rcli-01 csv -i input.csv -o output.json --header -d ','
 fn main() -> Result<()> {
@@ -33,6 +35,24 @@ fn main() -> Result<()> {
             }
             Base64Format::Encode => {
                 process_encode(&opts.input, &opts.output)?;
+            }
+        },
+        Subcommand::Sign(sign_opts) => match sign_opts.cmd {
+            SignCommand::Sign {
+                input,
+                output,
+                key,
+                format,
+            } => {
+                process_sign(&input, &key, &output, format)?;
+            }
+            SignCommand::Verify {
+                input,
+                key,
+                signature,
+                format,
+            } => {
+                process_verify(&input, &key, &signature, format)?; // 注意参数
             }
         },
     }
