@@ -1,5 +1,20 @@
 use clap::{Parser, Subcommand, ValueEnum};
 
+/// 文件签名命令行工具格式：
+/// rcli sign [OPTIONS]
+///
+/// 选项：
+///  --sign                生成签名模式
+///   -i, --input <FILE>    输入文件（- 表示 stdin）
+///   -o, --output <FILE>   输出文件（- 表示 stdout）
+///   -k, --key <KEY>       密钥（字符串或 @文件路径）
+///   -f, --format <FORMAT> 输出格式（hex 或 base64，默认 hex）
+///
+///  --verify              验证签名模式
+///   -i, --input <FILE>    输入文件（- 表示 stdin）
+///   -o, --output <FILE>   输出文件（- 表示 stdout）
+///   -k, --key <KEY>       密钥（字符串或 @文件路径）
+///   -f, --format <FORMAT> 输出格式（hex 或 base64，默认 hex）
 #[derive(Debug, Clone, Copy, ValueEnum)]
 pub enum SignFormat {
     Hex,    // 十六进制输出（默认）
