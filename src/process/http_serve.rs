@@ -6,7 +6,8 @@ use axum::{
     Router,
 };
 use std::{net::SocketAddr, path::PathBuf, sync::Arc};
-use tracing::info;
+
+use tracing::{info, warn};
 
 #[derive(Debug)]
 struct HttpServerState {
@@ -22,7 +23,7 @@ pub async fn process_http_serve(port: u16, path: PathBuf) -> Result<()> {
         .with_state(Arc::new(state));
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, router).await?;
-    info!("Server stopped");
+    info!("Server normally stopped");
 
     Ok(())
 }
@@ -34,11 +35,19 @@ async fn file_handler(
     let file_path = std::path::Path::new(&state.path).join(path);
     info!("Reading file: {:?}", file_path);
     if !file_path.exists() {
+        warn!("File not found: {:?}", file_path);
         (StatusCode::NOT_FOUND, "File not found".to_string())
     } else {
+        // 读取文件内容，但没有考虑文件大小，可能会导致内存溢出
         match tokio::fs::read_to_string(file_path).await {
-            Ok(content) => (StatusCode::OK, content),
-            Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()),
+            Ok(content) => {
+                info!("File found, content length: {:?}", content.len());
+                (StatusCode::OK, content)
+            }
+            Err(e) => {
+                warn!("Error reading file: {:?}", e);
+                (StatusCode::INTERNAL_SERVER_ERROR, e.to_string())
+            }
         }
     }
 }
