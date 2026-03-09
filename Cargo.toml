@@ -15,6 +15,7 @@ path = "src/main.rs"
 
 [dependencies]
 anyhow = "1.0.102"
+axum = { version = "0.8.8", features = ["http2", "query", "tracing"] }
 base64 = "0.22.1"
 clap = { version = "4.5.60", features = ["derive"] }
 csv = "1.4.0"
@@ -27,6 +28,9 @@ serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0"  # 如果需要 JSON 输出
 serde_yml = "0.0.12"
 sha2 = "0.10.9"
+tokio = { version = "1.50.0", features = ["rt", "rt-multi-thread", "net", "fs", "macros"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
 zxcvbn = "3.1.0"
 
 [dev-dependencies]
