@@ -1,6 +1,6 @@
 use clap::Parser;
 
-use crate::cli::{Base64Opts, CsvOpts, GenPassOpts, SignOpts};
+use crate::cli::{Base64Opts, CsvOpts, GenPassOpts, HttpOpts, SignOpts};
 
 #[derive(Debug, Parser)]
 #[command(name = "rcli", version, author,about,long_about=None)]
@@ -18,4 +18,6 @@ pub enum Subcommand {
     Base64(Base64Opts),
     #[command(name = "sign", about = "Sign or verify data")]
     Sign(SignOpts),
+    #[command(name = "http")]
+    Http(HttpOpts),
 }

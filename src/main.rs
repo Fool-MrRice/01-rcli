@@ -6,7 +6,7 @@ use clap::Parser;
 use rcli::{
     process_csv, process_decode, process_encode, process_genpass, process_sign, process_verify,
 };
-use rcli::{Base64Format, Opts, SignCommand, Subcommand};
+use rcli::{Base64Format, HttpCommand, Opts, SignCommand, Subcommand};
 
 /// rcli-01 csv -i input.csv -o output.json --header -d ','
 fn main() -> Result<()> {
@@ -55,6 +55,15 @@ fn main() -> Result<()> {
                 process_verify(&input, &key, &signature, format)?; // 注意参数
             }
         },
+        Subcommand::Http(opts) => {
+            match opts.cmd {
+                HttpCommand::Serve { port, dir } => {
+                    println!("{:?}", (port, dir));
+                    println!("serving at http://localhost:{}", port);
+                    // todo: process_http(&opts)?;
+                }
+            }
+        }
     }
     Ok(())
 }

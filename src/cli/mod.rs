@@ -1,12 +1,15 @@
 mod base64;
 mod csv;
+mod http;
 mod opts;
 mod pass;
 mod sign;
 
-pub use base64::{Base64Format, Base64Opts};
-pub use csv::{verify_input_file, CsvOpts, OutputFormat};
-pub use opts::{Opts, Subcommand};
-pub use pass::GenPassOpts;
-pub use sign::SignOpts;
-pub use sign::{SignCommand, SignFormat};
+pub use self::{
+    base64::{Base64Format, Base64Opts},
+    csv::{verify_input_file, CsvOpts, OutputFormat},
+    http::{HttpCommand, HttpOpts},
+    opts::{Opts, Subcommand},
+    pass::GenPassOpts,
+    sign::{SignCommand, SignFormat, SignOpts},
+};
