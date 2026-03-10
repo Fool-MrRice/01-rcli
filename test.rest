@@ -1,3 +1,7 @@
 ### Test index page
 
 GET http://localhost:8080/.gitignore
+
+
+### Test api
+GET http://localhost:8080/api/hello
